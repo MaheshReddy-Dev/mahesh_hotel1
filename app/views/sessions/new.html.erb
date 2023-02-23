@@ -1,0 +1,22 @@
+<div class="max-w-md mx-auto my-8 px-4">
+  <% if alert.present? %>
+    <p id='alert' class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-2 rounded" role="alert">
+      <%= alert %>
+    </p>
+  <% end %>
+  <h1 class="text-2xl font-bold mb-4">Login</h1>
+  <%= form_tag sessions_path, class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" do |form| %>
+    <div class='mb-4'>
+      <%= label_tag :email %>
+      <%= text_field_tag :emaail, nil, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class='mb-4'>
+      <%= label_tag :password %>
+      <%= password_field_tag :password, nil, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+    <div class='mb-4'>
+      <%= submit_tag 'Login', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      <%= link_to "Back", home_index_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+  <% end %>
+</div>
