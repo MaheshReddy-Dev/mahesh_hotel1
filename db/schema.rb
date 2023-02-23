@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_23_132309) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_173727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,8 +91,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_23_132309) do
     t.index ["client_id"], name: "index_regions_on_client_id"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.integer "number"
+    t.string "type"
+    t.float "price"
+    t.bigint "hotel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
+  end
+
   add_foreign_key "hotels", "clients"
   add_foreign_key "hotels", "regions"
   add_foreign_key "locations", "regions"
   add_foreign_key "regions", "clients"
+  add_foreign_key "rooms", "hotels"
 end

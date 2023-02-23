@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get 'home/index'
   resources :clients
+  resources :rooms
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'clients#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

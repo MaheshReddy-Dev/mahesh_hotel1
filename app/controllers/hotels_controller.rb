@@ -69,7 +69,7 @@ class HotelsController < ApplicationController
     end
 
     def hotel_params
-      params.fetch(:hotel, {}).permit(:name,:client_id, location_ids: [], region_ids: [])
+      params.fetch(:hotel, {}).permit(:name,:room_id,:client_id, location_ids: [], region_ids: [])
     end
 
 end
