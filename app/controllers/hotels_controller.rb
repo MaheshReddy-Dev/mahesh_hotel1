@@ -18,7 +18,7 @@ class HotelsController < ApplicationController
   end
   
 
- def new
+  def new
     @hotel = Hotel.new(hotel_params)
     if params[:hotel] && params[:hotel][:region_ids]
      @region = Array.new
@@ -30,14 +30,14 @@ class HotelsController < ApplicationController
   end
 
   def create
-    @hotel = current_client.hotels.build(hotel_params)
+    @hotel = Hotel.new(hotel_params)
 
     respond_to do |format|
       if @hotel.save
-        format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
+        format.html { redirect_to hotel_url(@hotel), notice: "hotel was successfully created." }
         format.json { render :show, status: :created, location: @hotel }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @hotel.errors, status: :unprocessable_entity }
       end
     end
@@ -69,7 +69,7 @@ class HotelsController < ApplicationController
     end
 
     def hotel_params
-      params.fetch(:library, {}).permit(:name,:client_id, location_ids: [], region_ids: [])
+      params.fetch(:hotel, {}).permit(:name,:client_id, location_ids: [], region_ids: [])
     end
 
 end

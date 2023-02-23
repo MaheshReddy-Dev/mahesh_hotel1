@@ -1,5 +1,5 @@
 class Region < ApplicationRecord
+  has_many :locations , dependent: :destroy
   belongs_to :client
-  has_many :hotel_regions
-  has_many :hotels, through: :hotel_regions
+  validates :name, presence: true
 end

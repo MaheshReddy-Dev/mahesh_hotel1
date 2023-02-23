@@ -1,9 +1,19 @@
 <div class="flex justify-end items-center py-2">
   <% if current_client %>
-    <h1 class="font-bold text-5xl text-center text-blue-500 mb-4">Welcome to <%= current_client.company %> ,</h1><br/>
-    <h1><span class="text-gray-700 mr-2"><%= current_client.name %></span> </h1>
-    <%= link_to 'Log Out', logout_path, class: "bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-lg" %>
+    <h1 class="font-bold text-5xl text-center text-blue-500 mb-4"><%= current_client.company %> </h1><br/>
+    <%= link_to 'Log Out', logout_path, class: "bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-lg ml-4" %>
     <%= link_to 'Add Hotel', new_hotel_path(current_client_id: current_client.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4 text-lg" %>
+    <% if current_client.hotels.any? %>
+      <h2 class="font-bold text-3xl text-center text-gray-700 mt-4">Your Hotels:</h2>
+      <ul class="list-disc pl-6 mt-4">
+        <% current_client.hotels.each do |hotel| %>
+          <h1><li><%= link_to hotel.name, hotel %></li></h1>
+        <% end %>
+      </ul>
+    <% else %>
+      <h2 class="font-bold text-3xl text-center text-gray-700 mt-4">You don't have any hotels yet.</h2>
+      <%= link_to 'Add Hotel', new_hotel_path(current_client_id: current_client.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 text-lg" %>
+    <% end %>
   <% else %>
     <h1><span class="text-gray-700 mx-2">Please</span></h1>
     <%= link_to 'Log In', login_path, class: "bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-lg" %>
