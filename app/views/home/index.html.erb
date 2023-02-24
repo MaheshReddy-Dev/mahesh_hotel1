@@ -1,24 +1,52 @@
-<div class="flex justify-end items-center py-2">
+<div class="container mx-auto">
   <% if current_client %>
-    <h1 class="font-bold text-5xl text-center text-blue-500 mb-4"><%= current_client.company %> </h1><br/>
-    <%= link_to 'Log Out', logout_path, class: "bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-lg ml-4" %>
-    <%= link_to 'Add Hotel', new_hotel_path(current_client_id: current_client.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4 text-lg" %>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="text-3xl font-bold">Welcome, <%= current_client.name %> from <%= current_client.company %>!</h1>
+      <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-primary align-self-center ml-auto" %>
+    </div>
     <% if current_client.hotels.any? %>
-      <h2 class="font-bold text-3xl text-center text-gray-700 mt-4">Your Hotels:</h2>
-      <ul class="list-disc pl-6 mt-4">
+      <h2 class="text-xl font-bold mb-2">Your hotels:</h2>
+      <ul class="list-disc list-inside">
         <% current_client.hotels.each do |hotel| %>
-          <h1><li><%= link_to hotel.name, hotel %></li></h1>
+          <li class="text-lg mb-4">
+            <div class="bg-gray-100 rounded-lg p-4">
+              <h3 class="text-lg font-bold mb-2"><%= hotel.name %></h3>
+              <%= link_to "Add rooms", new_room_path(hotel_id: hotel.id), class: "text-blue-500 hover:text-blue-700" %>
+              <% if hotel.rooms.any? %>
+                <h3 class="text-lg font-bold mb-2">Rooms:</h3>
+                <ul class="list-disc list-inside">
+                  <% hotel.rooms.each do |room| %>
+                    <li class="text-md mb-2">
+                      <a href="<%= room_path(room) %>"><%= room.room_type %></a>
+                      <% if room.room_facilities.any? %>
+                        <h3 class="text-lg font-bold mb-2">Facilities:</h3>
+                        <ul class="list-disc list-inside">
+                          <% room.room_facilities.each do |facility| %>
+                            <li class="text-md mb-2">
+                              <%= facility.room_facility_category.name %> - <%= facility.name %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      <% else %>
+                        <p class="text-md">(No facilities added yet. <%= link_to "Add a facility", new_room_facility_path(room_id: room.id), class: "text-blue-500 hover:text-blue-700" %>.)</p>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <p class="text-md">(No rooms added yet. <%= link_to "Add a room", new_room_path(hotel_id: hotel.id), class: "text-blue-500 hover:text-blue-700" %>.)</p>
+              <% end %>
+            </div>
+          </li>
         <% end %>
+        <li class="text-lg mb-4">
+          <%= link_to "Add a new hotel", new_hotel_path, class: "text-blue-500 hover:text-blue-700" %>
+        </li>
       </ul>
     <% else %>
-      <h2 class="font-bold text-3xl text-center text-gray-700 mt-4">You don't have any hotels yet.</h2>
-      <%= link_to 'Add Hotel', new_hotel_path(current_client_id: current_client.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 text-lg" %>
+      <p class="text-lg">You have not added any hotels yet. <%= link_to "Add a new hotel", new_hotel_path, class: "text-blue-500 hover:text-blue-700" %></p>
     <% end %>
   <% else %>
-    <h1><span class="text-gray-700 mx-2">Please</span></h1>
-    <%= link_to 'Log In', login_path, class: "bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-lg" %>
-    <h1><span class="text-gray-700 mx-2">or</span></h1>
-    <%= link_to 'Sign Up', signup_path, class: "bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded text-lg" %>
-    <span class="text-gray-700 mx-2">to continue</span>
+    <p class="text-lg">Please <%= link_to "sign up", new_client_path, class: "text-blue-500 hover:text-blue-700" %> or <%= link_to "log in", login_path, class: "text-blue-500 hover:text-blue-700" %> to continue.</p>
   <% end %>
-</div>
+</

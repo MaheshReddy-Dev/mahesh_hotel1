@@ -4,4 +4,5 @@ class Hotel < ApplicationRecord
   has_many :regions, through: :hotel_regions
   has_many :hotel_locations
   has_many :locations, through: :hotel_locations
+  has_many :rooms, dependent: :destroy
 end

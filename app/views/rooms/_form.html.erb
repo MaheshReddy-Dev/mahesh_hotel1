@@ -3,9 +3,9 @@
   <%= form.hidden_field :hotel_id, value: params[:hotel_id]%>
 
   <div class="my-5">
-    <%= form.label :room_type %>
-    <%= form.text_field :type, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+  <%= form.label :type %>
+  <%= form.collection_select :room_type, Room::ROOM_TYPES, :to_s, ->(type) { type.to_s.humanize }, { prompt: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+</div>
 
   <div class="my-5">
     <%= form.label :capacity %>

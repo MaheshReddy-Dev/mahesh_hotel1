@@ -1,0 +1,18 @@
+<div id="<%= dom_id room_facility %>">
+  <% if action_name != "show" %>
+    <%= link_to "Show this room facility", room_facility, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this room facility', edit_room_facility_path(room_facility), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+
+  <dl>
+    <dt>Room :</dt>
+    <dd><%= room_facility.room_id %></dd>
+
+    <dt>Room Facility Category:</dt>
+    <dd><%= room_facility.room_facility_category.name%></dd>
+
+    <dt>Name:</dt>
+    <dd><%= room_facility.name %></dd>
+  </dl>
+</div>

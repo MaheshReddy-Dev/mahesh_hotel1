@@ -1,0 +1,19 @@
+<%= form_with(model: room_facility, class: "contents") do |form| %>
+  <%= render 'shared/errors', obj: @room_facility %>
+
+  <%= form.hidden_field :room_id ,value: params[:room_id]%>
+
+  <div class="field">
+  <%= form.label :room_facility_category_id %>
+  <%= form.collection_select :room_facility_category_id, RoomFacilityCategory.all, :id, :name %>
+</div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

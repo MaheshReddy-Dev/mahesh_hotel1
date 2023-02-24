@@ -1,0 +1,2 @@
+module RoomFacilityCategoriesHelper
+end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :room_facilities
+  resources :room_facility_categories
   resources :hotels
   post "hotels/new"
   devise_for :admin_users, ActiveAdmin::Devise.config
