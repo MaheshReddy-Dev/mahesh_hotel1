@@ -1,13 +1,31 @@
 <div id="<%= dom_id hotel %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">Name:</strong>
-    <%= hotel.name %>
+    -<%= hotel.name %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Client:</strong>
-    <%= hotel.client.name %>
+    -<%= hotel.client.name %>
   </p>
+
+  <% if hotel.regions.any? %>
+    <strong class="block font-medium mb-1">Regions:</strong>
+    <ul>
+      <% hotel.regions.each do |region| %>
+        <li><%= region.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if hotel.locations.any? %>
+    <strong class="block font-medium mb-1">Locations:</strong>
+    <ul>
+      <% hotel.locations.each do |location| %>
+        <li><%= location.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <% if action_name != "show" %>
     <%= link_to "Show this hotel", hotel, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

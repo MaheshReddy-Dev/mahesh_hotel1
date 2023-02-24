@@ -2,7 +2,7 @@
   <% if current_client %>
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="text-3xl font-bold">Welcome, <%= current_client.name %> from <%= current_client.company %>!</h1>
-      <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-primary align-self-center ml-auto" %>
+      <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-primary align-self-center ml-auto text-lg text-blue-500 hover:text-blue-700" %>
     </div>
     <% if current_client.hotels.any? %>
       <h2 class="text-xl font-bold mb-2">Your hotels:</h2>
@@ -10,7 +10,7 @@
         <% current_client.hotels.each do |hotel| %>
           <li class="text-lg mb-4">
             <div class="bg-gray-100 rounded-lg p-4">
-              <h3 class="text-lg font-bold mb-2"><%= hotel.name %></h3>
+              <h3 class="text-lg font-bold mb-2"><%= link_to hotel.name , hotel_path(hotel)%></h3>
               <%= link_to "Add rooms", new_room_path(hotel_id: hotel.id), class: "text-blue-500 hover:text-blue-700" %>
               <% if hotel.rooms.any? %>
                 <h3 class="text-lg font-bold mb-2">Rooms:</h3>
@@ -40,13 +40,13 @@
           </li>
         <% end %>
         <li class="text-lg mb-4">
-          <%= link_to "Add a new hotel", new_hotel_path, class: "text-blue-500 hover:text-blue-700" %>
+          <%= link_to "Add a new hotel", new_hotel_path, class: "text-lg text-blue-500 hover:text-blue-700" %>
         </li>
       </ul>
     <% else %>
-      <p class="text-lg">You have not added any hotels yet. <%= link_to "Add a new hotel", new_hotel_path, class: "text-blue-500 hover:text-blue-700" %></p>
+      <p class="text-lg">You have not added any hotels yet. <%= link_to "Add a new hotel", new_hotel_path, class: "text-lg text-blue-500 hover:text-blue-700" %></p>
     <% end %>
   <% else %>
-    <p class="text-lg">Please <%= link_to "sign up", new_client_path, class: "text-blue-500 hover:text-blue-700" %> or <%= link_to "log in", login_path, class: "text-blue-500 hover:text-blue-700" %> to continue.</p>
+    <p class="text-lg">Please <%= link_to "sign up", new_client_path, class: "text-lg text-blue-500 hover:text-blue-700" %> or <%= link_to "log in", login_path, class: "text-lg text-blue-500 hover:text-blue-700" %> to continue.</p>
   <% end %>
-</
+</div>

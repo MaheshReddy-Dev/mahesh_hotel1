@@ -1,30 +1,41 @@
 <div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New hotel</h1>
+  <h1 class="font-bold text-4xl mb-8">New hotel</h1>
 
   <%= form_with(model: @hotel) do |form| %>
     <%= render 'shared/errors', obj: @hotel %>
     <%= form.hidden_field :client_id, value: current_client.id %>
-    
-      <p>
-        <%= form.label "Name:" %>
-        <%= form.text_field :name, class: "border p-2" %>
-      </p>
-      <div data-controller="form-element">
-      <%= form.button "Validate", formaction: new_hotel_path(@client_id), formmethod: :get, data: { turbo_frame: :location_field, form_element_target: "submitbtn"} %>
-        <%= form.label("Select_Regions:")%>
-        <%= form.collection_check_boxes :region_ids, Region.all,:id,:name, {include_blank: "-none-", include_hidden: false}, { data: { action: "change->form-element#remotesubmit"}, multiple: true} %>
+
+    <div class="mb-4">
+      <%= form.label "Name:", class: "text-xl" %>
+      <%= form.text_field :name, class: "border p-2 text-lg" %>
     </div>
 
-    <%= turbo_frame_tag :location_field do %>
-    <% unless params[:hotel].nil? || @region.nil? %>
-    <% @region.each do |region|%>
-    <%= form.label "Locations in region:" %>
-    <%= form.collection_check_boxes :location_ids, region.locations.order(:name), :id, :name, { include_blank: "-none-", include_hidden: false }, { multiple: true } %></br>
-    <% end %>
-    <% end %>
-    <% end %>
-    <%= form.submit "Create Hotel", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-    <% end %>
+    <h3>
+      <b>
+        <div data-controller="form-element" class="mb-4">
+          <%= form.button "Validate", formaction: new_hotel_path(@client_id), formmethod: :get, data: { turbo_frame: :location_field, form_element_target: "submitbtn"}, class: "text-lg font-bold rounded-lg py-3 px-5 bg-green-500 text-white hover:bg-green-700 mr-4" %>
+          <%= form.label("Select Regions:", class: "text-xl") %>
+          <%= form.collection_check_boxes :region_ids, Region.all, :id, :name, {include_blank: "-none-", include_hidden: false}, { data: { action: "change->form-element#remotesubmit"}, multiple: true, class: "text-lg" } %>
+        </div>
 
-  <%= link_to 'Back to hotels', hotels_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= turbo_frame_tag :location_field do %>
+          <% unless params[:hotel].nil? || @region.nil? %>
+            <% @region.each do |region| %>
+              <div class="mb-4">
+                <%= form.label "Locations in #{region.name}:", class: "text-xl" %>
+                <%= form.collection_check_boxes :location_ids, region.locations.order(:name), :id, :name, { include_blank: "-none-", include_hidden: false }, { multiple: true, class: "text-lg" } %>
+              </div>
+              <div class="my-4"></div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </b>
+    </h3>
+
+    <%= form.submit "Create Hotel", data: { turbo: true }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-lg mt-8 text-lg" %>
+  <% end %>
+
+  <div class="mt-4">
+    <%= link_to 'Back to login page', root_path, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-lg" %>
+  </div>
 </div>
