@@ -55,7 +55,9 @@
       <p class="text-lg">You have not added any hotels yet. <%= link_to "Add a new hotel", new_hotel_path, class: "text-lg text-blue-500 hover:text-blue-700" %></p>
     <% end %>
   <% else %>
-    <p class="text-lg">Please <%= link_to "sign up", new_client_path, class: "text-lg text-blue-500 hover:text-blue-700" %> if your are a new client and login or if you are a existing client <%= link_to "click here", login_path, class: "text-lg text-blue-500 hover:text-blue-700" %> to continue.
-    To acess the regions and room room facility category <%= link_to "click here", "/admin" %>  </p>
+  <div class="text-lg mt-8">
+  <p class="mb-4">If you're a new client, <%= link_to "sign up", new_client_path, class: "text-blue-500 hover:text-blue-700" %> to get started. Already have an account? <%= link_to "Login here", login_path, class: "text-blue-500 hover:text-blue-700" %>.</p>
+  <p>To access the regions and room facility categories, please <%= link_to "click here", "/admin", class: "text-blue-500 hover:text-blue-700" %>.</p>
+</div>
   <% end %>
 </div>

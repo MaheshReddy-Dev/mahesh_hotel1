@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+ .hidden-field {
+    display: none;
+  }
+  
+  .form-select, .form-input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .form-select:focus, .form-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ccc;
+  }
+  
+  .inline {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

@@ -5,13 +5,17 @@ class SessionsController < ApplicationController
   def create
     client = Client.find_by_emaail(params[:emaail])
     if client && client.authenticate(params[:password])
-       session[:client_id] = client.id
-       redirect_to root_url, notice: "Logged in!"
-     else
-       flash.now[:alert] = "Email or password is invalid"
-       render "new"
-     end
-   end
+      session[:client_id] = client.id
+      redirect_to root_url, notice: "Logged in!"
+    else
+      flash.now[:alert] = "Email or password is invalid"
+      puts flash
+      debugger # Add this line to pause execution and start the debugger
+      render "new"
+    end
+  end
+  
+  
 
    def destroy
      session[:client_id] = nil

@@ -1,16 +1,16 @@
 <%= form_with(model: room_facility, class: "contents") do |form| %>
   <%= render 'shared/errors', obj: @room_facility %>
 
-  <%= form.hidden_field :room_id ,value: params[:room_id]%>
+  <%= form.hidden_field :room_id ,value: params[:room_id], class: "hidden-field" %>
 
   <div class="field">
-  <%= form.label :room_facility_category_id %>
-  <%= form.collection_select :room_facility_category_id, RoomFacilityCategory.all, :id, :name %>
-</div>
-
+    <%= form.label :select_room_facility_category %>
+    <%= form.collection_select :room_facility_category_id, RoomFacilityCategory.all, :id, :name, {}, {class: "form-select"} %>
+  </div>
+  
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :add_facilities_accodrding_your_category %><br/>
+    <%= form.text_field :name, class: "form-input" %>
   </div>
 
   <div class="inline">

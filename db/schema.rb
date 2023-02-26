@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_110206) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_26_141631) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -85,9 +85,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_110206) do
 
   create_table "regions", force: :cascade do |t|
     t.string "name"
-    t.bigint "client_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "client_id"
     t.index ["client_id"], name: "index_regions_on_client_id"
   end
 
