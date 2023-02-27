@@ -1,6 +1,6 @@
 <%= turbo_stream.prepend "hotels" do %>
-    <%= render @hotel %>
-  <% end %>
-  
-  <%= turbo_stream.replace "hotel_form", partial: "form", locals: { hotel: Hotel.new }, id: "hotel_form" %>
-  
+ <%= render @hotel %>
+<% end %>
+<%= turbo_stream.replace "hotel_form" do %>
+ <%= render "form", hotel: Hotel.new %>
+<% end %>

@@ -1,10 +1,7 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
-  protect_from_forgery with: :exception
-  skip_before_action :authenticate_client!, only: [:login]
+  before_action :authenticate_client!, only: [:index, :show]
 
-  def login
-  end
   
   def index
     @clients = Client.all
@@ -74,4 +71,5 @@ class ClientsController < ApplicationController
       @current_client ||= Client.find(session[:client_id]) if session[:client_id]
     end
     helper_method :current_client
+
 end

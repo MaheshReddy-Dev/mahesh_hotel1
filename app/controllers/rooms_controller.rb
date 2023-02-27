@@ -1,5 +1,6 @@
 class RoomsController < InheritedResources::Base
   before_action :set_room, only: %i[ show edit update destroy ]
+  before_action :authenticate_client!
 
   def index
     @rooms = Room.all

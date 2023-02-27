@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_client!, only: [:new, :create, :destroy]
 
   def new
   end
@@ -16,9 +15,16 @@ class SessionsController < ApplicationController
     end
   end  
 
-  def destroy
+def destroy
+  if current_client
     current_client.update(authenticated: false)
-    session.delete(:client_id)
+    session[:client_id] = nil
+    @current_client = nil
     redirect_to root_url, notice: "Logged out!"
+  else
+    redirect_to login_path, alert: 'Please log in to continue.'
   end
+end
+
+  
 end

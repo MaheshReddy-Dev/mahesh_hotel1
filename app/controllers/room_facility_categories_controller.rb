@@ -1,5 +1,6 @@
 class RoomFacilityCategoriesController < ApplicationController
     before_action :set_room_facility_category, only: %i[ show edit update destroy ]
+    before_action :authenticate_client!
   
     def index
       @room_facility_categories = RoomFacilityCategory.all
