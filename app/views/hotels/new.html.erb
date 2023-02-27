@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "new_hotel" do %>
   <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl mb-8">New hotel</h1>
-  <%= form_with(id: "new_hotel", model: @hotel) do |form| %>
+  <%= form_with(id: "hotel_new", model: @hotel) do |form| %>
     <%= render 'shared/errors', obj: @hotel %>
     <%= form.hidden_field :client_id, value: current_client.id %>
 

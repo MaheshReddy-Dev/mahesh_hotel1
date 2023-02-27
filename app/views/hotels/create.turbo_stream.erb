@@ -1,6 +1,7 @@
-<%= turbo_stream.prepend "hotels" do %>
- <%= render @hotel %>
-<% end %>
-<%= turbo_stream.replace "hotel_form" do %>
- <%= render "form", hotel: Hotel.new %>
+
+  <%= turbo_stream.prepend "hotels" do %>
+    <%= render @hotel %>
+    <% end %>
+    <%= turbo_stream.replace "hotel_new" do %>
+     <%= render template: "hotels/new", hotel: Hotel.new %>
 <% end %>

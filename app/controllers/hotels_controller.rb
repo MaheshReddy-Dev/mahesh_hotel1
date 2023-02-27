@@ -36,7 +36,7 @@ class HotelsController < ApplicationController
     respond_to do |format|
       if @hotel.save
         format.turbo_stream
-        format.html { redirect_to root_path, notice: "hotel was successfully created." }
+        format.html { redirect_to hotel_url(@hotel), notice: "hotel was successfully created." }
         format.json { render :show, status: :created, location: @hotel }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class HotelsController < ApplicationController
   def destroy
     @hotel.destroy
     respond_to do |format|
-      format.html { redirect_to hotels_url, notice: 'Hotel was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Hotel was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
