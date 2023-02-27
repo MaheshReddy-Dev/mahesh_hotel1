@@ -1,37 +1,24 @@
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_client!, only: [:new, :create, :destroy]
+
   def new
   end
 
   def create
-    client = Client.find_by_emaail(params[:emaail])
+    client = Client.find_by(emaail: params[:emaail])
     if client && client.authenticate(params[:password])
-      session[:client_id] = client.id
-      redirect_to root_url, notice: "Logged in!"
+      session[:client_id] = client.id 
+      client.update(authenticated: true) 
+      redirect_to root_path, notice: 'Logged in successfully.'
     else
-      flash.now[:alert] = "Email or password is invalid"
-      puts flash
-      debugger # Add this line to pause execution and start the debugger
-      render "new"
+      flash.now[:alert] = 'Invalid email or password.'
+      render :new
     end
-  end
-  
-  
+  end  
 
-   def destroy
-     session[:client_id] = nil
-     redirect_to root_url, notice: "Logged out!"
-   end
-   
-   def current_client
-    if session[:client_id]
-      begin
-        @current_client ||= Client.find(session[:client_id])
-      rescue ActiveRecord::RecordNotFound => e
-        redirect_to root_path, alert: "Client not found"
-      end
-    else
-      @current_client = nil
-    end
+  def destroy
+    current_client.update(authenticated: false)
+    session.delete(:client_id)
+    redirect_to root_url, notice: "Logged out!"
   end
-  
 end

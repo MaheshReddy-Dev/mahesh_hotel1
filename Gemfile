@@ -9,7 +9,7 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use sqlite3 as the database for Active Record
+# Use postgresql as the database for Active Record
 gem 'pg'
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -51,6 +51,7 @@ gem "bootsnap", require: false
 gem "activeadmin"
 
 gem "devise"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

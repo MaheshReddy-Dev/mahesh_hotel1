@@ -1,4 +1,4 @@
-<%= form_with(model: room_facility, class: "contents") do |form| %>
+<%= form_with(id: "room_facility_form", model: room_facility, class: "contents") do |form| %>
   <%= render 'shared/errors', obj: @room_facility %>
 
   <%= form.hidden_field :room_id ,value: params[:room_id], class: "hidden-field" %>

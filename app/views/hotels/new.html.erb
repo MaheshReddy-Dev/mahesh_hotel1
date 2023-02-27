@@ -1,7 +1,7 @@
-<div class="mx-auto md:w-2/3 w-full">
+<%= turbo_frame_tag "new_hotel" do %>
+  <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl mb-8">New hotel</h1>
-
-  <%= form_with(model: @hotel) do |form| %>
+  <%= form_with(id: "new_hotel", model: @hotel) do |form| %>
     <%= render 'shared/errors', obj: @hotel %>
     <%= form.hidden_field :client_id, value: current_client.id %>
 
@@ -35,7 +35,8 @@
     <%= form.submit "Create Hotel", data: { turbo: true }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-lg mt-8 text-lg" %>
   <% end %>
 
-  <div class="mt-4">
-    <%= link_to 'Back to login page', root_path, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-lg" %>
-  </div>
-</div>
+   <div class="mt-4">
+     <%= link_to 'Back to login page', root_path, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium text-lg" %>
+   </div>
+ </div>
+<% end %>

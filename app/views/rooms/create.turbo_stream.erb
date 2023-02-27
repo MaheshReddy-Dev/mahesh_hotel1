@@ -1,0 +1,6 @@
+<%= turbo_stream.prepend "rooms" do %>
+    <%= render @room %>
+  <% end %>
+  
+  <%= turbo_stream.replace "room_form", partial: "form", locals: { room: Room.new }, id: "room_form" %>
+  

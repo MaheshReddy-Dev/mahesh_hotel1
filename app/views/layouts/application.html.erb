@@ -14,11 +14,10 @@
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
     <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:alert] %>
-      <div class="alert"><%= flash[:alert] %></div>
-    <% end %>
+    <div class="bg-green-200 text-green-800 p-3 mb-4 rounded-md"><%= flash[:notice] %></div>
+  <% elsif flash[:alert] %>
+    <div class="bg-red-200 text-red-800 p-3 mb-4 rounded-md"><%= flash[:alert] %></div>
+  <% end %>
       <%= yield %>
     </main>
   </body>

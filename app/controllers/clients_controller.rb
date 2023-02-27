@@ -1,8 +1,11 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
   protect_from_forgery with: :exception
+  skip_before_action :authenticate_client!, only: [:login]
 
-
+  def login
+  end
+  
   def index
     @clients = Client.all
   end

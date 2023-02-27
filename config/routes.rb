@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "hotels/new"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  get 'home/index'
+  get 'client/login'
   resources :clients
   resources :rooms
   resources :sessions, only: [:new, :create, :destroy]
@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-   root "home#index"
+   root "clients#login"
 end

@@ -18,9 +18,10 @@ class RoomsController < InheritedResources::Base
   
   def create
     @room = Room.new(room_params)
-
+    flash[:notice] = "Room was successfully created."
     respond_to do |format|
       if @room.save
+        format.turbo_stream
         format.html { redirect_to room_url(@room), notice: "room was successfully created." }
         format.json { render :show, status: :created, location: @room }
       else
