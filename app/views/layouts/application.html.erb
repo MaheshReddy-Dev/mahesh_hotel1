@@ -13,12 +13,18 @@
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
-    <% if flash[:notice] %>
-    <div class="bg-green-200 text-green-800 p-3 mb-4 rounded-md"><%= flash[:notice] %></div>
-  <% elsif flash[:alert] %>
-    <div class="bg-red-200 text-red-800 p-3 mb-4 rounded-md"><%= flash[:alert] %></div>
-  <% end %>
-      <%= yield %>
+    
+      <div class="container">
+        <div class="row">
+          <% flash.each do |key, value| %>
+            <div class="bg-yellow-200 p-3 mb-3 text-yellow-800 text-center"><%= value %></div>
+          <% end %>
+          
+          <%= yield %>
+          <%= turbo_frame_tag "remote_modal", target: "_top" %>
+        </div>
+      </div>
+      
     </main>
   </body>
 </html>

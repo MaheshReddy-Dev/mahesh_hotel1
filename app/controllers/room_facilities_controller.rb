@@ -21,12 +21,12 @@ class RoomFacilitiesController < ApplicationController
     @room_facility = RoomFacility.new(room_facility_params)
     respond_to do |format|
       if @room_facility.save
-        format.turbo_stream
-        format.html { redirect_to room_facility_url(@room_facility), notice: "room_facility was successfully created." }
+        format.html { redirect_to root_path, notice: "Rroom Facility was successfully created." }
         format.json { render :show, status: :created, location: @room_facility }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @room_facility.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end
@@ -39,6 +39,7 @@ class RoomFacilitiesController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @room_facility.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end

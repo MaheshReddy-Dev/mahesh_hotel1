@@ -1,6 +1,5 @@
-<%= turbo_frame_tag "new_room_facility" do  %>
+<%= render  "shared/remote_model", title: "Adding Facilities" do %>
 <div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New room facility</h1>
 
   <%= render "form", room_facility: @room_facility %>
 

@@ -1,7 +1,10 @@
 <%= form_with(id: "room_facility_form", model: room_facility, class: "contents") do |form| %>
   <%= render 'shared/errors', obj: @room_facility %>
+   
+  <% if room_facility.new_record? %>
+    <%= form.hidden_field :room_id, value: params[:room_id], class: "hidden-field" %>
+  <% end %>
 
-  <%= form.hidden_field :room_id ,value: params[:room_id], class: "hidden-field" %>
 
   <div class="field">
     <%= form.label :select_room_facility_category %>

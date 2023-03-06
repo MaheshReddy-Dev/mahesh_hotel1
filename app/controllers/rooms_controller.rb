@@ -19,15 +19,14 @@ class RoomsController < InheritedResources::Base
   
   def create
     @room = Room.new(room_params)
-    flash[:notice] = "Room was successfully created."
     respond_to do |format|
       if @room.save
-        format.turbo_stream
-        format.html { redirect_to room_url(@room), notice: "room was successfully created." }
+        format.html { redirect_to root_path, notice: "Room was successfully created." }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @room.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end
@@ -39,6 +38,7 @@ class RoomsController < InheritedResources::Base
         format.json { render :show, status: :ok, location: @room }
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
         format.json { render json: @room.errors, status: :unprocessable_entity }
       end
     end

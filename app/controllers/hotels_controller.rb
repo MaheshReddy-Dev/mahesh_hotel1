@@ -35,12 +35,12 @@ class HotelsController < ApplicationController
 
     respond_to do |format|
       if @hotel.save
-        format.turbo_stream
-        format.html { redirect_to hotel_url(@hotel), notice: "hotel was successfully created." }
+        format.html { redirect_to root_path, notice: "Hotel was successfully created." }
         format.json { render :show, status: :created, location: @hotel }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @hotel.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end
@@ -52,6 +52,7 @@ class HotelsController < ApplicationController
         format.json { render :show, status: :ok, location: @hotel }
       else
         format.html { render :edit }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
         format.json { render json: @hotel.errors, status: :unprocessable_entity }
       end
     end

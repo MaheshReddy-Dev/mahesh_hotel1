@@ -1,17 +1,38 @@
-<%= form_with(model: hotel, class: "contents") do |form| %>
+<%= form_with(id: "hotel_form",model: @hotel, class: "form") do |form| %>
   <%= render 'shared/errors', obj: @hotel %>
+  <% if @hotel.new_record? %>
+    <%= form.hidden_field :client_id, value: current_client.id %>
+  <% end %>
 
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="mb-4">
+    <%= form.label :name, "Name:", class: "form-label text-xl" %>
+    <%= form.text_field :name, class: "form-control form-control-lg" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :client_id %>
-    <%= form.text_field :client_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+    <b>
+      <div data-controller="form-element" class="mb-4">
+        <%= form.button "Validate", formaction: new_hotel_path(@client_id), formmethod: :get, data: { turbo_frame: :location_field, form_element_target: "submitbtn"}, class: "btn btn-lg btn-success mr-4" %>
+        <%= form.label :region_ids, "Select Regions:", class: "form-label text-xl" %>
+        <%= form.collection_check_boxes :region_ids, Region.all, :id, :name, {include_blank: "-none-", include_hidden: false}, { data: { action: "change->form-element#remotesubmit"}, multiple: true } %>
+      </div>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+      <%= turbo_frame_tag :location_field do %>
+        <% unless params[:hotel].nil? || @region.nil? %>
+          <% @region.each do |region| %>
+            <div class="mb-4">
+              <%= form.label :location_ids, "Locations in #{region.name}:", class: "form-label text-xl" %>
+              <%= form.collection_check_boxes :location_ids, region.locations.order(:name), :id, :name, { include_blank: "-none-" } %>
+            </div>
+            <div class="my-4"></div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </b>
+
+
+  <%= form.submit @hotel.new_record? ? "Create Hotel" : "Update Hotel", data: { turbo: true }, class: "btn btn-lg btn-primary mt-8 text-lg" %>
 <% end %>
+
+<div class="mt-4">
+  <%= link_to 'Back to login page', root_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+</div>
