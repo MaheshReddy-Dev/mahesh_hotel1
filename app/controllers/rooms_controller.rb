@@ -34,7 +34,7 @@ class RoomsController < InheritedResources::Base
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to room_url(@room), notice: "room was successfully updated." }
+        format.html { redirect_to room_url(@room), notice: "Room was successfully updated." }
         format.json { render :show, status: :ok, location: @room }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,7 +48,7 @@ class RoomsController < InheritedResources::Base
     @room.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url, notice: "room was successfully destroyed." }
+      format.html { redirect_to root_url, notice: "Room was successfully destroyed." }
       format.json { head :no_content }
     end
   end

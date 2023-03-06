@@ -1,17 +1,44 @@
 <div class="mx-auto md:w-2/3 w-full flex">
   <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Name:</strong>
+      <%= @hotel.name %>
+    </p>
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Client:</strong>
+      <%= @hotel.client.name %>
+    </p>
+
+    <% if @hotel.regions.any? %>
+      <p class="my-5">
+        <strong class="block font-medium mb-1">Regions:</strong>
+        <ul>
+          <% @hotel.regions.each do |region| %>
+            <li><%= region.name %></li>
+          <% end %>
+        </ul>
+      </p>
     <% end %>
 
-    <%= render @hotel %>
+    <% if @hotel.locations.any? %>
+      <p class="my-5">
+        <strong class="block font-medium mb-1">Locations:</strong>
+        <ul>
+          <% @hotel.locations.each do |location| %>
+            <li><%= location.name %></li>
+          <% end %>
+        </ul>
+      </p>
+    <% end %>
 
     <%= link_to 'Edit this hotel', edit_hotel_path(@hotel), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
-    <%= link_to 'Destroy this hotel', hotel_path(@hotel), data: { turbo_method: :delete, turbo_confirm: "Are you sure want to delete #{@hotel.name} " }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <%= link_to 'Destroy this hotel', hotel_path(@hotel), data: { turbo_method: :delete, turbo_confirm: "Are you sure want to delete #{@hotel.name} " }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
     <%= link_to 'Back to login page', root_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Add Rooms", new_room_path(hotel_id: @hotel.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
-
 </div>

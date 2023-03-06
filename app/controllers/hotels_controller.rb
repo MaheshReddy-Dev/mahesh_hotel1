@@ -32,10 +32,16 @@ class HotelsController < ApplicationController
 
   def create
     @hotel = Hotel.new(hotel_params)
-
+  
     respond_to do |format|
       if @hotel.save
-        format.html { redirect_to root_path, notice: "Hotel was successfully created." }
+        format.html do
+          if request.referer.include?('hotels/new')
+            redirect_to hotels_path, notice: "Hotel was created successfully."
+          else
+            redirect_to root_path, notice: "Hotel was created successfully."
+          end
+        end
         format.json { render :show, status: :created, location: @hotel }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,11 +50,17 @@ class HotelsController < ApplicationController
       end
     end
   end
-
+  
   def update
     respond_to do |format|
       if @hotel.update(hotel_params)
-        format.html { redirect_to @hotel, notice: 'Hotel was successfully updated.' }
+        format.html do
+          if request.referer.include?('hotels/edit')
+            redirect_to root_path, notice: 'Hotel deatils updated sucessfully.'
+          else
+            redirect_to @hotel, notice: 'Hotel deatils updated sucessfully.'
+          end
+        end
         format.json { render :show, status: :ok, location: @hotel }
       else
         format.html { render :edit }
@@ -57,6 +69,7 @@ class HotelsController < ApplicationController
       end
     end
   end
+  
 
   def destroy
     @hotel.destroy

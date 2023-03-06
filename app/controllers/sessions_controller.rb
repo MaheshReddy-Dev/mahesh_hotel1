@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
       client.update(authenticated: true) 
       redirect_to root_path, notice: 'Logged in successfully.'
     else
-      flash.now[:alert] = 'Invalid email or password.'
-      render :new
+      redirect_to login_path, alert: 'Invalid email or password.'
     end
   end  
 
