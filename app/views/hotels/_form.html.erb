@@ -6,13 +6,13 @@
 
   <div class="mb-4">
     <%= form.label :name, "Name:", class: "form-label text-xl" %>
-    <%= form.text_field :name, class: "form-control form-control-lg" %>
+    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
     <b>
       <div data-controller="form-element" class="mb-4">
         <%= form.button "Validate", formaction: new_hotel_path(@client_id), formmethod: :get, data: { turbo_frame: :location_field, form_element_target: "submitbtn"}, class: "btn btn-lg btn-success mr-4" %>
-        <%= form.label :region_ids, "Select Regions:", class: "form-label text-xl" %>
+        <%= form.label :region_ids, "Select Regions:", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
         <%= form.collection_check_boxes :region_ids, Region.all, :id, :name, {include_blank: "-none-", include_hidden: false}, { data: { action: "change->form-element#remotesubmit"}, multiple: true } %>
       </div>
 

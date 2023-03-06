@@ -8,13 +8,13 @@
 
   <div class="field">
   <%= form.label :select_room_facility_category %>
-  <%= form.collection_select :room_facility_category_id, RoomFacilityCategory.all, :id, :name, { prompt: "Please select" }, {class: "form-select"} %>
+  <%= form.collection_select :room_facility_category_id, RoomFacilityCategory.all, :id, :name, { prompt: "Please select" }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
 </div>
 
   
   <div class="field">
     <%= form.label :add_facilities_accodrding_your_category %><br/>
-    <%= form.text_area :name, class: "form-input" %>
+    <%= form.text_area :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
