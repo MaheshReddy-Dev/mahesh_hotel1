@@ -25,7 +25,7 @@
                         <ul class="list-disc list-inside">
                           <% room.room_facilities.each do |facility| %>
                             <li class="text-md mb-2">
-                              <%= facility.room_facility_category.name %> - <%= facility.name %>
+                              <%=  facility.room_facility_category.name %> - <%= link_to facility.name, room_facility_path(facility) %>
                             </li>
                           <% end %>
                           <%= turbo_frame_tag "new_room_facility" do %>

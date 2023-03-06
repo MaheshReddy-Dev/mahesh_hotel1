@@ -1,10 +1,12 @@
 <%= form_with(id: "room_form",model: room, class: "contents") do |form| %>
   <%= render 'shared/errors', obj: @room %>
+  <% if @room.new_record? %>
   <%= form.hidden_field :hotel_id, value: params[:hotel_id]%>
+  <% end %>
 
   <div class="my-5">
   <%= form.label :type %>
-    <%= form.collection_select :room_type, Room::ROOM_TYPES, :to_s, ->(type) { type.to_s.humanize }, { prompt: true, multiple: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.collection_select :room_type, Room::ROOM_TYPES, :to_s, ->(type) { type.to_s.humanize }, { prompt: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
