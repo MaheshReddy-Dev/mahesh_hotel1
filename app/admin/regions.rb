@@ -1,5 +1,6 @@
-ActiveAdmin.register Region do
+# frozen_string_literal: true
 
+ActiveAdmin.register Region do
   permit_params :name, :client_id
 
   index do
@@ -7,5 +8,4 @@ ActiveAdmin.register Region do
     column :name
     actions
   end
-  
 end

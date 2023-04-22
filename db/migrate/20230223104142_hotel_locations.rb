@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HotelLocations < ActiveRecord::Migration[7.0]
   def change
     create_table :hotel_locations do |t|
@@ -6,4 +8,4 @@ class HotelLocations < ActiveRecord::Migration[7.0]
       t.timestamps
     end
   end
-end 
+end

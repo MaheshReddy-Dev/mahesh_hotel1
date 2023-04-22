@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Client < ApplicationRecord
   has_secure_password
   validates :emaail, presence: true, uniqueness: true

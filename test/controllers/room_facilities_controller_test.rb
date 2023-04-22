@@ -1,45 +1,47 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class RoomFacilitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @room_facility = room_facilities(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get room_facilities_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_room_facility_url
     assert_response :success
   end
 
-  test "should create room_facility" do
-    assert_difference("RoomFacility.count") do
-      post room_facilities_url, params: { room_facility: {  } }
+  test 'should create room_facility' do
+    assert_difference('RoomFacility.count') do
+      post room_facilities_url, params: { room_facility: {} }
     end
 
     assert_redirected_to room_facility_url(RoomFacility.last)
   end
 
-  test "should show room_facility" do
+  test 'should show room_facility' do
     get room_facility_url(@room_facility)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_room_facility_url(@room_facility)
     assert_response :success
   end
 
-  test "should update room_facility" do
-    patch room_facility_url(@room_facility), params: { room_facility: {  } }
+  test 'should update room_facility' do
+    patch room_facility_url(@room_facility), params: { room_facility: {} }
     assert_redirected_to room_facility_url(@room_facility)
   end
 
-  test "should destroy room_facility" do
-    assert_difference("RoomFacility.count", -1) do
+  test 'should destroy room_facility' do
+    assert_difference('RoomFacility.count', -1) do
       delete room_facility_url(@room_facility)
     end
 

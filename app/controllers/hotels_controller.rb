@@ -1,45 +1,46 @@
+# frozen_string_literal: true
+
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: [:show, :edit, :update, :destroy]
+  before_action :set_hotel, only: %i[show edit update destroy]
   before_action :authenticate_client!
 
   def index
     @hotels = Hotel.all
   end
 
-  def show
-  end
+  def show; end
+
   def edit
-    if params[:hotel] && params[:hotel][:region_ids]
-      @region = Array.new
-      params[:hotel][:region_ids].each do |r|
-        r = r.to_i
-        @region << Region.find(r)
-      end
-     end
+    return unless params[:hotel] && params[:hotel][:region_ids]
+
+    @region = []
+    params[:hotel][:region_ids].each do |r|
+      r = r.to_i
+      @region << Region.find(r)
+    end
   end
-  
 
   def new
     @hotel = Hotel.new(hotel_params)
-    if params[:hotel] && params[:hotel][:region_ids]
-     @region = Array.new
-     params[:hotel][:region_ids].each do |r|
-       r = r.to_i
-       @region << Region.find(r)
-     end
+    return unless params[:hotel] && params[:hotel][:region_ids]
+
+    @region = []
+    params[:hotel][:region_ids].each do |r|
+      r = r.to_i
+      @region << Region.find(r)
     end
   end
 
   def create
     @hotel = Hotel.new(hotel_params)
-  
+
     respond_to do |format|
       if @hotel.save
         format.html do
           if request.referer.include?('hotels/new')
-            redirect_to hotels_path, notice: "Hotel was created successfully."
+            redirect_to hotels_path, notice: 'Hotel was created successfully.'
           else
-            redirect_to root_path, notice: "Hotel was created successfully."
+            redirect_to root_path, notice: 'Hotel was created successfully.'
           end
         end
         format.json { render :show, status: :created, location: @hotel }
@@ -50,7 +51,7 @@ class HotelsController < ApplicationController
       end
     end
   end
-  
+
   def update
     respond_to do |format|
       if @hotel.update(hotel_params)
@@ -69,7 +70,6 @@ class HotelsController < ApplicationController
       end
     end
   end
-  
 
   def destroy
     @hotel.destroy
@@ -80,13 +80,12 @@ class HotelsController < ApplicationController
   end
 
   private
-    def set_hotel
-      @hotel = Hotel.find(params[:id])
-    end
 
-    def hotel_params
-      params.fetch(:hotel, {}).permit(:name,:room_id,:client_id, location_ids: [], region_ids: [])
-    end
+  def set_hotel
+    @hotel = Hotel.find(params[:id])
+  end
 
+  def hotel_params
+    params.fetch(:hotel, {}).permit(:name, :room_id, :client_id, location_ids: [], region_ids: [])
+  end
 end
-
